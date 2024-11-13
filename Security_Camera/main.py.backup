@@ -1,0 +1,47 @@
+import os
+import sys
+import tkinter as tk
+from tkinter import ttk
+
+# Redirect stderr to devnull to suppress IMK messages
+stderr = sys.stderr
+sys.stderr = open(os.devnull, 'w')
+
+# Test-Fenster direkt in main.py
+class TestWindow(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        
+        print("Starting TestWindow") # Debug print
+        
+        self.title("Test Window")
+        self.geometry("800x600")
+        
+        # Create notebook
+        self.notebook = ttk.Notebook(self)
+        print("Created notebook") # Debug print
+        
+        # Create simple frames for tabs
+        self.tab1 = ttk.Frame(self.notebook)
+        self.tab2 = ttk.Frame(self.notebook)
+        print("Created frames") # Debug print
+        
+        # Add some content to both tabs
+        ttk.Label(self.tab1, text="This is Tab 1").pack(pady=20)
+        ttk.Label(self.tab2, text="This is Tab 2").pack(pady=20)
+        print("Added labels") # Debug print
+        
+        # Add frames to notebook
+        self.notebook.add(self.tab1, text="Tab 1")
+        self.notebook.add(self.tab2, text="Tab 2")
+        print("Added tabs to notebook") # Debug print
+        
+        # Pack notebook
+        self.notebook.pack(expand=True, fill="both")
+        print("Packed notebook") # Debug print
+
+if __name__ == "__main__":
+    print("Starting application") # Debug print
+    app = TestWindow()
+    print("Created window") # Debug print
+    app.mainloop() 
